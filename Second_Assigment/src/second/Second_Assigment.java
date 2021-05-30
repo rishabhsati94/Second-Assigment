@@ -18,7 +18,7 @@ public class Second_Assigment {
 		
 		System.out.println("Array is:");
 		for(int i = 1; i < size+1; i++) {
-			System.out.print(i+"\t");
+			System.out.print(arr[i]+"\t");
 		}
 
 	}

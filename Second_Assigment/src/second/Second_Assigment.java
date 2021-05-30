@@ -8,34 +8,43 @@ public class Second_Assigment {
 	
 	static int removeDuplicates(int arr[], int n)
     {
-        // Return, if array is empty
-        // or contains a single element
-        if (n==0 || n==1)
+        if (n == 0 || n == 1)
             return n;
       
-        int[] temp = new int[n];
-         
-        // Start traversing elements
-        int j = 0;
-        for (int i=0; i<n-1; i++)
-            // If current element is not equal
-            // to next element then store that
-            // current element
+        // To store index of next unique element
+        int j = 1;
+      
+        // Doing same as done in Method 1
+        // Just maintaining another updated index i.e. j
+        for (int i = 1; i < n-1; i++)
             if (arr[i] != arr[i+1])
-                temp[j++] = arr[i];
-         
-        // Store the last element as whether
-        // it is unique or repeated, it hasn't
-        // stored previously
-        temp[j++] = arr[n-1];  
-         
-        // Modify original array
-        for (int i=0; i<j; i++)
-            arr[i] = temp[i];
+                arr[j++] = arr[i];
+      
+        arr[j++] = arr[n-1];
       
         return j;
     }
+	
+	static int firstOccPositve(int arr[], int low, int high)
+	{
+		if(high >= low)
+	    {
+	        int mid = (low + high)/2; /*low + (high - low)/2;*/
+	        if(mid == arr[mid]){
+	            return mid;
+	        }
+	        
+	        if(mid > arr[mid]){
+	             return firstOccPositve(arr, (mid + 1), high);
+	        }
 
+	        else{
+	            return firstOccPositve(arr, low, (mid -1));
+	        }
+	    }
+	    return -1;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.print("Enter the Size of Array:");
@@ -52,19 +61,33 @@ public class Second_Assigment {
 			arr[i] = s.nextInt();
 		}
 		
-//		System.out.println("Array is Before Sorting:");
+		Arrays.sort(arr,1,arr.length);
+		
+		
+		
+//		System.out.println("Array is  Sorting:");
 //		for(int i = 1; i < arr.length; i++) {
-//			System.out.print(arr[i]+"\t");
+//			System.out.println(arr[i]+"\t"+"index is: "+i);
 //		}
 //		System.out.println();
-		Arrays.sort(arr);
 		
 		int size2 = removeDuplicates(arr, (arr.length));
 		
-		System.out.println("Array is After Sorting:");
-		for(int i = 1; i < size2; i++) {
-			System.out.print(arr[i]+"\t");
-		}
+		
+//		System.out.println("Array is Delete Dupliate:");
+//		for(int i = 1; i < size2; i++) {
+//			System.out.println(arr[i]+"\t"+"index is: "+i);
+//		}
+		
+		int index = firstOccPositve(arr,1, (size2-1));
+		
+		if (index != -1){
+	        System.out.println("first positive :"+index);
+	       }
+	    else{
+	    	System.out.println("not found");
+	    }
+		
 
 	}
 
